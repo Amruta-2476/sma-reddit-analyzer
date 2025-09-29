@@ -1,0 +1,7 @@
+source_subreddit,target_subreddit,shared_users
+memes,dankmemes,7
+memes,AdviceAnimals,3
+memes,wholesomememes,2
+dankmemes,wholesomememes,1
+memes,MemeEconomy,1
+wholesomememes,AdviceAnimals,1
