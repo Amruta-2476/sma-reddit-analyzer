@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reddit Meme Spread Analysis Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 0.95em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .section {
+            padding: 40px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .section:last-child {
+            border-bottom: none;
+        }
+        
+        .section h2 {
+            color: #333;
+            font-size: 2em;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: inline-block;
+        }
+        
+        .section p {
+            color: #555;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        .viz-container {
+        background: #f8f9fa;
+        padding: 10px;
+        border-radius: 10px;
+        margin-top: 20px;
+
+        display: flex;
+        justify-content: center; /* centers horizontally */
+        align-items: center;     /* centers vertically */
+    }
+
+    .viz-container img { 
+        width: auto;
+        height: 300px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+        
+        .key-findings {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .key-findings h3 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+        
+        .key-findings ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+        
+        .key-findings li {
+            margin: 8px 0;
+        }
+        
+        .insights {
+            background: #d1ecf1;
+            border-left: 4px solid #17a2b8;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .insights h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+        }
+        
+        .insights p {
+            color: #0c5460;
+            margin: 8px 0;
+        }
+        
+        .footer {
+            background: #343a40;
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .footer p {
+            color: #ccc;
+            margin: 5px 0;
+        }
+        
+        .methodology {
+            background: #e7f3ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        
+        .methodology h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .methodology p {
+            color: #333;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>Tracking Reddit Meme Spread Across Networks</h1>
+            <p>Using Network Analytics to Understand Viral Content Propagation</p>
+            <p style="margin-top: 10px; font-size: 0.9em; opacity: 0.8;">Social Media Analytics Project</p>
+        </div>
+        
+        <!-- Key Metrics -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">1,295</div>
+                <div class="stat-label">Total Nodes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">1,305</div>
+                <div class="stat-label">Edges</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">0.0016</div>
+                <div class="stat-label">Network Density</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">15</div>
+                <div class="stat-label">Super-Spreaders</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">18:00</div>
+                <div class="stat-label">Peak Hour (UTC)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">Subreddits</div>
+            </div>
+        </div>
+        
+        <!-- Executive Summary -->
+        <div class="section">
+            <h2>Executive Summary</h2>
+            <p>This project analyzes how memes propagate across Reddit communities by examining user engagement patterns across five major meme subreddits. Using network analytics and graph theory, we identified key mechanisms of meme spread including temporal patterns, cross-community bridges, and super-spreader users.</p>
+            
+            <div class="key-findings">
+                <h3>Key Findings</h3>
+                <ul>
+                    <li><strong>15 super-spreaders</strong> (1.2% of users) actively bridge multiple meme communities</li>
+                    <li>Peak meme activity occurs at <strong>18:00 UTC</strong>, indicating optimal viral spread window</li>
+                    <li><strong>r/memes</strong> acts as the central hub with 460 connections</li>
+                    <li>Strong community overlap between r/memes and r/dankmemes (159 shared users)</li>
+                    <li>Network density of 0.0016 indicates selective, targeted spread rather than random diffusion</li>
+                </ul>
+            </div>
+        </div>
+        
+        <!-- Methodology -->
+        <div class="section">
+            <h2>Methodology</h2>
+            <div class="methodology">
+                <h3>Data Collection & Analysis</h3>
+                <p><strong>Platform:</strong> Reddit API (PRAW)</p>
+                <p><strong>Communities:</strong> r/memes, r/dankmemes, r/wholesomememes, r/AdviceAnimals, r/MemeEconomy</p>
+                <p><strong>Sample Size:</strong> 1,452 interactions from top 20 hot posts per subreddit</p>
+                <p><strong>Tools:</strong> Python, NetworkX, pandas, matplotlib, seaborn</p>
+                <p><strong>Network Type:</strong> Bipartite (User-Subreddit)</p>
+            </div>
+        </div>
+        
+        <!-- Visualization 1: Temporal Analysis -->
+        <div class="section">
+            <h2>1. Temporal Analysis: Meme Velocity</h2>
+            <p>Understanding <strong>when</strong> memes spread is crucial for predicting viral potential. This analysis reveals hourly engagement patterns across all subreddits.</p>
+            
+            <div class="viz-container">
+                <img src="visualizations/meme_velocity_by_hour.png" alt="Meme Engagement by Hour">
+            </div>
+            
+            <div class="insights">
+                <h3>Insights</h3>
+                <p><strong>Peak Activity:</strong> 18:00 UTC with 89 interactions - this is the golden hour for meme posting</p>
+                <p><strong>Secondary Peaks:</strong> 12:00, 17:00, and 20:00 UTC show elevated activity</p>
+                <p><strong>Low Activity:</strong> 03:00-09:00 UTC (night/early morning hours)</p>
+                <p><strong>Implication:</strong> Memes posted during peak hours have exponentially higher chance of cross-community spread</p>
+            </div>
+        </div>
+        
+        <!-- Visualization 2: Community Overlap -->
+        <div class="section">
+            <h2>2. Community Overlap Matrix</h2>
+            <p>The heatmap reveals which subreddit communities share users, creating natural pathways for meme propagation.</p>
+            
+            <div class="viz-container">
+                <img src="visualizations/subreddit_overlap_heatmap.png" alt="Subreddit User Overlap">
+            </div>
+            
+            <div class="insights">
+                <h3>Insights</h3>
+                <p><strong>Strongest Bridge:</strong> r/memes ↔ r/dankmemes (159 shared users - 33% overlap)</p>
+                <p><strong>Secondary Connections:</strong> r/memes ↔ r/wholesomememes (122 shared users)</p>
+                <p><strong>Isolated Community:</strong> r/MemeEconomy shows minimal overlap (only 34 total users)</p>
+                <p><strong>Hub Status:</strong> r/memes has 460 total users, making it the central distribution point</p>
+            </div>
+        </div>
+        
+        <!-- Visualization 3: Subreddit Network -->
+        <div class="section">
+            <h2>3. Subreddit-to-Subreddit Network</h2>
+            <p>This network graph visualizes the actual propagation pathways between communities, weighted by the number of bridge users.</p>
+            
+            <div class="viz-container">
+                <img src="visualizations/viz_subreddit_network.png" alt="Subreddit Network">
+            </div>
+            
+            <div class="insights">
+                <h3>Insights</h3>
+                <p><strong>Primary Highway:</strong> r/memes ↔ r/dankmemes (7 bridge users actively carrying memes)</p>
+                <p><strong>Secondary Routes:</strong> r/memes ↔ r/wholesomememes (3 users), r/memes ↔ r/AdviceAnimals (3 users)</p>
+                <p><strong>Network Structure:</strong> Hub-and-spoke model with r/memes at the center</p>
+                <p><strong>Propagation Model:</strong> Memes spread in two steps: (1) gain traction in origin subreddit, (2) bridge users carry to connected communities</p>
+            </div>
+        </div>
+        
+        <!-- Visualization 4: Engagement Quality -->
+        <div class="section">
+            <h2>4. Engagement Quality by Community</h2>
+            <p>Understanding which communities amplify content through high engagement scores.</p>
+            
+            <div class="viz-container">
+                <img src="visualizations/viz_engagement_quality.png" alt="Engagement Quality">
+            </div>
+            
+            <div class="insights">
+                <h3>Insights</h3>
+                <p><strong>Highest Quality:</strong> r/wholesomememes (464 avg score) - engaged, positive community</p>
+                <p><strong>Highest Volume:</strong> r/memes (460 interactions) - mainstream, general audience</p>
+                <p><strong>Lowest Engagement:</strong> r/MemeEconomy (43 avg score) - small, niche community</p>
+                <p><strong>Sweet Spot:</strong> r/memes + r/wholesomememes combine volume and quality for maximum viral potential</p>
+            </div>
+        </div>
+        
+        <!-- Visualization 5: Full Network -->
+        <div class="section">
+            <h2>5. Complete Network Structure</h2>
+            <p>The full bipartite network showing all user-subreddit connections reveals the complete topology of meme spread.</p>
+            
+            <div class="viz-container">
+                <img src="visualizations/viz_full_network.png" alt="Full Network">
+            </div>
+            
+            <div class="insights">
+                <h3>Insights</h3>
+                <p><strong>Clustering:</strong> Dense user clusters around each subreddit indicate community loyalty</p>
+                <p><strong>Bridge Connections:</strong> Sparse connections between clusters = super-spreaders</p>
+                <p><strong>Network Topology:</strong> Classic small-world structure (short paths, high clustering)</p>
+                <p><strong>Propagation Efficiency:</strong> Short average path length enables rapid viral spread</p>
+            </div>
+        </div>
+        
+        <!-- Visualization 6: Network Metrics -->
+        <div class="section">
+            <h2>6. Network Metrics Dashboard</h2>
+            <p>Comprehensive summary of key network statistics and their implications for meme propagation.</p>
+            
+            <div class="viz-container">
+                <img src="visualizations/viz_network_metrics.png" alt="Network Metrics Dashboard">
+            </div>
+            
+            <div class="insights">
+                <h3>Insights</h3>
+                <p><strong>Sparse Network:</strong> 0.0016 density indicates selective, quality-based engagement</p>
+                <p><strong>Power-Law Distribution:</strong> Typical social network pattern - few highly connected nodes, many low-degree nodes</p>
+                <p><strong>Hub Dominance:</strong> r/memes accounts for 35% of all connections</p>
+                <p><strong>Average Degree:</strong> 2.02 means typical user engages with ~2 subreddits</p>
+            </div>
+        </div>
+        
+        <!-- Conclusions -->
+        <div class="section">
+            <h2>Conclusions</h2>
+            <p>This network analytics study reveals that Reddit meme spread is not random diffusion but follows predictable patterns governed by:</p>
+            
+            <div class="key-findings">
+                <h3>Propagation Mechanisms</h3>
+                <ul>
+                    <li><strong>Temporal Factor:</strong> 18:00 UTC peak creates velocity windows for rapid spread</li>
+                    <li><strong>Structural Factor:</strong> Hub-and-spoke topology with r/memes as central distribution point</li>
+                    <li><strong>Human Factor:</strong> 15 super-spreaders act as bridges between siloed communities</li>
+                    <li><strong>Pathway Factor:</strong> r/memes ↔ r/dankmemes forms primary propagation highway</li>
+                </ul>
+            </div>
+            
+            <div class="methodology">
+                <h3>Applications</h3>
+                <p><strong>Viral Marketing:</strong> Target super-spreaders, post at 18:00 UTC, seed in r/memes</p>
+                <p><strong>Content Strategy:</strong> Create cross-community appeal to leverage bridge users</p>
+                <p><strong>Misinformation Control:</strong> Monitor super-spreaders and high-overlap communities</p>
+                <p><strong>Trend Prediction:</strong> Track r/memes for early signals of viral content</p>
+            </div>
+            
+            <p style="margin-top: 20px;"><strong>Key Takeaway:</strong> Meme virality requires alignment of timing (peak hours), position (hub communities), and carriers (super-spreaders). Understanding these network dynamics enables both content amplification and information control.</p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>Project:</strong> Tracking Reddit Meme Spread Across Networks Using Network Analytics</p>
+            <p><strong>Course:</strong> Social Media Analytics</p>
+            <p><strong>Tools:</strong> Python, PRAW, NetworkX, pandas, matplotlib, seaborn</p>
+            <p><strong>Data Source:</strong> Reddit API (r/memes, r/dankmemes, r/wholesomememes, r/AdviceAnimals, r/MemeEconomy)</p>
+            <p style="margin-top: 15px; font-size: 0.9em;">Generated: October 2025</p>
+        </div>
+    </div>
+</body>
+</html>
