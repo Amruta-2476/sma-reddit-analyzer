@@ -2,18 +2,6 @@ import praw
 import pandas as pd
 from datetime import datetime
 
-"""
-REDDIT MEME NETWORK SCRAPER
-----------------------------
-Tracks meme spread across Reddit communities
-NO rate limiting issues, official API, completely legal!
-
-Setup:
-1. pip install praw
-2. Get Reddit API credentials from https://www.reddit.com/prefs/apps
-3. Replace YOUR_CLIENT_ID and YOUR_CLIENT_SECRET below
-"""
-
 # -------------------------
 # 1. SETUP REDDIT API
 # -------------------------
